@@ -1,0 +1,97 @@
+GDPR Policy Statement
+
+We do not wish to collect, store or use your personal data.
+We are only collecting and storing your personal data because the government has asked us to do so to support COVID-19 NHS test and trace.
+We will collect the minimum amount of personal data - i.e. your name and phone number
+We may pass this on to the NHS test and trace team, if they reqest data from us.
+We will not pass it on to anyone else.
+We will make every reasonable effort to store the data for the minimum time practically possible.  
+The government have requested data to be stored for 21 days.  We will delete your data from our servers shortly after the 21 days is up.
+The data will be stored on Amazon Web Services Virtual Private Cloud Servers.
+If you have a query about the personal data that we hold on you, please email matty8salisbury@gmail.com
+
+GDPR Checklist
+
+Lawful basis and transparency
+
+1. Conduct an information audit to determine what information you process and who has access to it.
+
+Response: Personal Information: Name and phone number as given by customer at point of order.  Only accessible by the server adminsitrator.
+
+2. Have a legal justification for your data processing activities.
+
+Response: Requested by government.
+
+3. Provide clear information about your data processing and legal justificiation in your privacy policy.
+
+Response: See policy above.
+
+Data security
+
+4. Take data protection into account at all times, from the moment you begin developing a product to each time you process dataa.
+
+Response: Done.  Record minimum, store safely, restrict access, don't pass on to anyone other than relevant government agency, delete in a timely fashion.
+
+5. Enrcrypt, pseudonymize, or anonymize personal data wherever possible.
+
+Response: Stored behind AWS server login.
+
+6. Create an internal security policy for your team members, and build awareness about data protection.
+
+Response: See policy above.
+
+7. Know when to conduct a data protection impact assessment, and have a process in place to carry it out.
+
+Response: If policy should change or a complaint be raised or an incident occur an impact assessment will be carried out.
+
+8. Have a process in place to notify the authorities and your data subjects in the event of a data breach.
+
+Response: Will notify the Information Commissioner's Office within 72 hours.
+
+Accountability and governance
+
+9. Designate someone responsible for ensurity GDPR compliance across your organization.
+
+Response: Matt Salisbury (there is only me and it's not much of an orgainsation!)
+
+10. Sign a data processing agreement between your organization and any third parties that process personal data on your behalf.
+
+Response: Not applicable
+
+11. If your organization is outside the EU, appoint a representative within one of the EU member states.
+
+Response: Not applicable
+
+12. Appoint a Data Protection Officer (if necessary).
+
+Response: Not necessary.
+
+Privacy rights
+
+13. It's easy for your customers to request and receive all the information you have about them.
+
+Response: Email contact is in GDPR policy statement above.
+
+14. It's easy for your customers to correct or update inaccurate or incomplete information.
+
+Response: Email contact is in GDPR policy statement above.
+
+15. It's easy for your customers to request to have their personal data deleted.
+
+Response: Email contact is in GDPR policy statement above.
+
+16. It's easy for your customers to ask you to stop processing their data.
+
+Response: Email contact is in GDPR policy statement above.
+
+17. It's easy for your customers to receive a copy of their personal data in a format that can be easily transferred to another company.
+
+Response: Email contact is in GDPR policy statement above.
+
+18. It's easy for your customers to object to you processing their data.
+
+Response: Email contact is in GDPR policy statement above.
+
+19. If you make decisions about people based on automated processes, you have a procedure to protect their rights.
+
+Response: Not applicable
