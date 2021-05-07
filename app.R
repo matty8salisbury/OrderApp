@@ -1,9 +1,6 @@
 
 #1. Set up: Install libraries and set working drive ----
 
-#venue <<- "Fortunella_KT1_1JE"
-#venueDisplayTitle <<- "Fortunella"
-
 priceList <- read.csv(paste0("price_list", ".csv", sep = ""), header = T)
 foodSections <- as.character(unique(priceList$Section[priceList$Section != "Drink" & priceList$Section != "Option"]))
 
@@ -251,8 +248,8 @@ shinyServer <- function(input, output, session) {
         #establish database connection
         
         options(mysql = list(
-          "host" = "database-2.c7cch80rsap5.eu-west-2.rds.amazonaws.com",
-          "port" = 3306,
+          "host" = Sys.getenv("MY_HOST"),
+          "port" = Sys.getenv("SQL_PORT"),
           "user" = Sys.getenv("MY_UID"),
           "password" = Sys.getenv("MY_PWD")
         ))
