@@ -248,7 +248,7 @@ shinyServer <- function(input, output, session) {
         #establish database connection
         
         options(mysql = list(
-          "host" = Sys.getenv("MY_HOST"),
+          "host" = Sys.getenv("SQL_ENDPOINT"),
           "port" = Sys.getenv("SQL_PORT"),
           "user" = Sys.getenv("MY_UID"),
           "password" = Sys.getenv("MY_PWD")
