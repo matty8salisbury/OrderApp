@@ -1,6 +1,23 @@
 
 #1. Set up: Install libraries and set working drive ----
 
+#install libraries for Shiny
+library("shiny")
+#library("shinydashboard")
+library("shinyWidgets")
+library("shinyalert")
+#library("pixiedust")
+#install libraries for app
+library("qrcode")
+#suppressPackageStartupMessages(library("gmailr"))
+
+#install libraries for database update
+library("RMariaDB")
+library("DBI")
+#library("dplyr")
+library("DT")
+library("xtable")
+
 priceList <- read.csv(paste0("price_list", ".csv", sep = ""), header = T)
 foodSections <- as.character(unique(priceList$Section[priceList$Section != "Drink" & priceList$Section != "Option"]))
 
@@ -27,24 +44,6 @@ tabelize <- function(variables, price_list) {
   }
   return(as.character(lapply(tables, paste))) # return HTML tables pasted together
 }
-
-
-#install libraries for Shiny
-library("shiny")
-#library("shinydashboard")
-library("shinyWidgets")
-library("shinyalert")
-#library("pixiedust")
-#install libraries for app
-library("qrcode")
-#suppressPackageStartupMessages(library("gmailr"))
-
-#install libraries for database update
-library("RMariaDB")
-library("DBI")
-#library("dplyr")
-library("DT")
-library("xtable")
 
 #2. Shiny Server function to record information for a single order ----
 
