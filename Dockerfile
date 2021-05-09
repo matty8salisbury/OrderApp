@@ -8,6 +8,7 @@ RUN apt-get update
 
 RUN mkdir /root/OrderApp
 COPY OrderApp /root/OrderApp
+COPY OrderApp/Rprofile.site usr/local/lib/R/etc/
 
 EXPOSE 3838
 
