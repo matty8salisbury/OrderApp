@@ -8,8 +8,7 @@ RUN apt-get update
 
 RUN mkdir /root/OrderApp
 COPY OrderApp /root/OrderApp
-COPY venueinfo.R /root/venueinfo.R
 
 EXPOSE 3838
 
-CMD ["R", "-e", "source('/root/venueinfo.R'); shiny::runApp('/root/OrderApp')"]
+CMD ["R", "-e", "source('/root/OrderApp/venueinfo.R'); shiny::runApp('/root/OrderApp')"]
