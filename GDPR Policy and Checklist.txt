@@ -8,7 +8,7 @@ We will not pass it on to anyone else.
 We will make every reasonable effort to store the data for the minimum time practically possible.  
 The government have requested data to be stored for 21 days.  We will delete your data from our servers shortly after the 21 days is up.
 The data will be stored on Amazon Web Services Virtual Private Cloud Servers.
-If you have a query about the personal data that we hold on you, please email matty8salisbury@gmail.com
+If you have a query about the personal data that we hold on you, please email shinymenu.online@gmail.com
 
 GDPR Checklist
 
