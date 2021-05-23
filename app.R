@@ -367,7 +367,7 @@ shinyUI <- fluidPage(
     helpText("Select item and quantity then click 'Add to Order'. Repeat to build order."),
     helpText("Please flick back to the Menu tabs if you want to take another look."),
     helpText("To remove a selection,  click on the item in the order summary."),
-    helpText("If you have chosen a Main or Salad, please also select your options from this dropdown list."),
+    #helpText("Please also select any optional choices from this dropdown list."),
     
     #select item type
     uiOutput(outputId = "SelectedItem"),
