@@ -267,7 +267,7 @@ shinyServer <- function(input, output, session) {
         
         values$Rec$OrderNumber[1] <- values$OrderNum
         values$RandEl[1] <-formatC(as.integer(sample(1:100000000, 1)), width = 9, flag = "0")
-        values$Rec$OrderQrRef[1] <- paste0(values$TestCentre, Sys.time(), values$RandEl[1], values$Rec$OrderNumber[1])
+        values$Rec$OrderQrRef[1] <- paste0(as.character(Sys.time()), values$TestCentre, values$RandEl[1], values$Rec$OrderNumber[1])
         
         values$df$OrderQrRef <- rep(values$Rec$OrderQrRef[1], dim(values$df)[[1]])
         
