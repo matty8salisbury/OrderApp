@@ -292,7 +292,7 @@ shinyServer <- function(input, output, session) {
         #clear order screen and give order received and confirmed message
         
         output$ConfMessage <- renderText({paste0("Order Received and Confirmed.  Order Number ", values$OrderNum, ", Table Number ", values$TableNumber)})
-        output$OrderSummary <- renderTable({values$df[,1:3]})
+        output$OrderSummary <- renderTable({values$df[,2:4]})
         #values$df <- data.frame(Item = "", Number = 0, Price = 0, Pub = "", TableNumber = 0, OrderNumber = 0, OrderQrRef = "", OrderStatus = "")
         
         
