@@ -19,6 +19,12 @@ library("DT")
 library("xtable")
 
 priceList <- read.csv(paste0("price_list", ".csv", sep = ""), header = T)
+if(is.na(match("service_charge", priceList[,1])) == F) {
+  serviceChargePc <- priceList[match("service_charge", priceList[,1]),2]
+  priceList <- priceList[-match("service_charge", priceList[,1]),]
+} else {
+  serviceChargePc <- 0
+}
 foodSections <- as.character(unique(priceList$Section[priceList$Section != "Drink" & priceList$Section != "Option"]))
 
 
@@ -134,6 +140,18 @@ shinyServer <- function(input, output, session) {
       newLine <- c(input$submit, input$Item, input$ItemNum, values$price, values$TestCentre, input$TableNumber, values$OrderNum, "", "Open") 
       values$df[dim(values$df)[[1]],] <- newLine
       values$df[dim(values$df)[[1]] + 1,] <- c(input$submit + 1, "Total", sum(as.numeric(values$df$Number)), sum(as.numeric(values$df$Number)*as.numeric(values$df$Price)), values$TestCentre, input$TableNumber, values$OrderNum, "", "Open")
+      
+      if(serviceChargePc > 0 & input$submit == 1) {
+        values$df <- values$df[-match("Total", values$df$Item),]
+        values$df[dim(values$df)[[1]] + 1,] <- c(input$submit + 1, "Service Charge", 1, round(sum(as.numeric(values$df$Number)*as.numeric(values$df$Price))*serviceChargePc,2), values$TestCentre, input$TableNumber, values$OrderNum, "", "Open")
+        values$df[dim(values$df)[[1]] + 1,] <- c(input$submit + 1, "Total", sum(as.numeric(values$df$Number)), sum(as.numeric(values$df$Number)*as.numeric(values$df$Price)), values$TestCentre, input$TableNumber, values$OrderNum, "", "Open")
+      } else if(serviceChargePc > 0 & input$submit > 1) {
+        values$df <- values$df[-match("Service Charge", values$df$Item),]
+        values$df <- values$df[-match("Total", values$df$Item),]
+        values$df[dim(values$df)[[1]] + 1,] <- c(input$submit + 1, "Service Charge", 1, round(sum(as.numeric(values$df$Number)*as.numeric(values$df$Price))*serviceChargePc,2), values$TestCentre, input$TableNumber, values$OrderNum, "", "Open")
+        values$df[dim(values$df)[[1]] + 1,] <- c(input$submit + 1, "Total", sum(as.numeric(values$df$Number)), sum(as.numeric(values$df$Number)*as.numeric(values$df$Price)), values$TestCentre, input$TableNumber, values$OrderNum, "", "Open")
+      }
+      
       values$stringCaption <- (paste0(values$TestCentre,", Table Number ", as.character(values$TableNumber)))
       
       output$TableTitle <- renderText({values$stringCaption})
