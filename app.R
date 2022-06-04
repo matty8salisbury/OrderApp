@@ -18,7 +18,9 @@ library("DBI")
 library("DT")
 library("xtable")
 
+source('venueinfo.R')
 priceList <- read.csv(paste0("price_list", ".csv", sep = ""), header = T)
+
 if(is.na(match("service_charge", priceList[,1])) == F) {
   serviceChargePc <- priceList[match("service_charge", priceList[,1]),2]
   priceList <- priceList[-match("service_charge", priceList[,1]),]
