@@ -407,7 +407,8 @@ shinyUI <- fluidPage(
     
     div(style="margin-bottom:10px"),
     
-    useShinyalert(rmd = FALSE),
+    #useShinyalert(rmd = FALSE),
+    useShinyalert(),
     
     #textOutput(outputId = "TableTitle"),
     DT::dataTableOutput(outputId = "OrderTable", width = '500px'),
