@@ -10,7 +10,7 @@ venueDisplayTitle <<- "Bananaman's Bar"
 
 #SQL database host, port, username and password
 
-Sys.setenv(SQL_ENDPOINT = "local")
+Sys.setenv(SQL_ENDPOINT = "localhost")
 Sys.setenv(SQL_PORT = 3306)
 Sys.setenv(MY_UID='replaceThisUsername')
 Sys.setenv(MY_PWD='replaceThisPassword')
