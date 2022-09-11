@@ -287,7 +287,7 @@ shinyServer <- function(input, output, session) {
         
         values$Rec$OrderNumber[1] <- values$OrderNum
         values$RandEl[1] <-formatC(as.integer(sample(1:100000000, 1)), width = 9, flag = "0")
-        values$Rec$OrderQrRef[1] <- paste0(as.character(Sys.time()), values$TestCentre, values$RandEl[1], values$Rec$OrderNumber[1])
+        values$Rec$OrderQrRef[1] <- paste0(as.character(Sys.time()), substring(values$TestCentre, nchar(values$TestCentre) - 7, nchar(values$TestCentre)), values$Rec$OrderNumber[1])
         
         values$df$OrderQrRef <- rep(values$Rec$OrderQrRef[1], dim(values$df)[[1]])
         
@@ -296,8 +296,8 @@ shinyServer <- function(input, output, session) {
         
         #add order and record to database
         
-        dbWriteTable(cn, name = paste0(values$TestCentre, "Records"), value = as.data.frame(values$Rec), append = TRUE)
-        dbWriteTable(cn, name = paste0(values$TestCentre, "Orders"), value = as.data.frame(values$df), append = TRUE)
+        dbWriteTable(cn, name = paste0(values$TestCentre, "Records"), value = values$Rec, append = TRUE)
+        dbWriteTable(cn, name = paste0(values$TestCentre, "Orders"), value = values$df, append = TRUE)
         dbDisconnect(cn)
         
         #switch to order summary tab
