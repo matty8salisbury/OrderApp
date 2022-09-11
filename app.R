@@ -296,8 +296,8 @@ shinyServer <- function(input, output, session) {
         
         #add order and record to database
         
-        dbWriteTable(cn, name = paste0(values$TestCentre, "Records"), value = values$Rec, append = TRUE)
-        dbWriteTable(cn, name = paste0(values$TestCentre, "Orders"), value = values$df, append = TRUE)
+        dbWriteTable(cn, name = paste0(values$TestCentre, "Records"), value = as.data.frame(values$Rec), append = TRUE)
+        dbWriteTable(cn, name = paste0(values$TestCentre, "Orders"), value = as.data.frame(values$df), append = TRUE)
         dbDisconnect(cn)
         
         #switch to order summary tab
