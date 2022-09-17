@@ -293,6 +293,7 @@ shinyServer <- function(input, output, session) {
         values$Rec$OrderNumber[1] <- values$OrderNum
         values$RandEl[1] <-formatC(as.integer(sample(1:100000000, 1)), width = 9, flag = "0")
         values$Rec$OrderQrRef[1] <- gsub(":","",gsub(" ", "", paste0(as.character(Sys.time()), substring(values$TestCentre, nchar(values$TestCentre) - 7, nchar(values$TestCentre)), values$Rec$OrderNumber[1])))
+        values$Rec$OrderQrRef[1] <- gsub("_","",gsub("-", "", values$Rec$OrderQrRef[1]))
         
         values$df$OrderQrRef <- rep(values$Rec$OrderQrRef[1], dim(values$df)[[1]])
         
@@ -300,8 +301,7 @@ shinyServer <- function(input, output, session) {
         names(values$Db) <- c("OrderRecord", "CompOrderList")
         
         #add order and record to database
-        print(values$Rec)
-        print(values$df)
+        
         dbWriteTable(cn, name = paste0(values$TestCentre, "Records"), value = values$Rec, append = TRUE)
         dbWriteTable(cn, name = paste0(values$TestCentre, "Orders"), value = values$df, append = TRUE)
         dbDisconnect(cn)
@@ -326,7 +326,7 @@ shinyServer <- function(input, output, session) {
           filename = gsub(":", "_", paste0("Order", values$OrderNum, Sys.time(),".png")),
           content = function(file = gsub(":", "_", paste0("Order", values$OrderNum, date(),".png"))) {
             png(file, width = 200, height = 200)
-            print(qrcode_gen(gsub("_","",values$Rec$OrderQrRef[1])))
+            print(qrcode_gen(values$Rec$OrderQrRef[1]))
             dev.off()
           })
       }
