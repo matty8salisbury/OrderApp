@@ -284,6 +284,7 @@ shinyServer <- function(input, output, session) {
         )
         
         values$OrdNumInt <- dbGetQuery(cn, paste0("SELECT MAX(OrderNumber) FROM ", values$TestCentre, "Orders;"))
+        #values$OrdNumInt <- as.data.frame(matrix(NA,2,1))
         values$OrderNum <- as.numeric(values$OrdNumInt[1,1]) + 1
         if(is.na(values$OrderNum) == T || is.null(values$OrderNum) == T) {values$OrderNum <- 1}
         values$Rec$OrderNumber <- values$OrderNum
@@ -291,7 +292,7 @@ shinyServer <- function(input, output, session) {
         
         values$Rec$OrderNumber[1] <- values$OrderNum
         values$RandEl[1] <-formatC(as.integer(sample(1:100000000, 1)), width = 9, flag = "0")
-        values$Rec$OrderQrRef[1] <- paste0(as.character(Sys.time()), substring(values$TestCentre, nchar(values$TestCentre) - 7, nchar(values$TestCentre)), values$Rec$OrderNumber[1])
+        values$Rec$OrderQrRef[1] <- gsub(":","",gsub(" ", "", paste0(as.character(Sys.time()), substring(values$TestCentre, nchar(values$TestCentre) - 7, nchar(values$TestCentre)), values$Rec$OrderNumber[1])))
         
         values$df$OrderQrRef <- rep(values$Rec$OrderQrRef[1], dim(values$df)[[1]])
         
@@ -299,7 +300,8 @@ shinyServer <- function(input, output, session) {
         names(values$Db) <- c("OrderRecord", "CompOrderList")
         
         #add order and record to database
-        
+        print(values$Rec)
+        print(values$df)
         dbWriteTable(cn, name = paste0(values$TestCentre, "Records"), value = values$Rec, append = TRUE)
         dbWriteTable(cn, name = paste0(values$TestCentre, "Orders"), value = values$df, append = TRUE)
         dbDisconnect(cn)
