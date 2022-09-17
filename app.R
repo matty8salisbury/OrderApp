@@ -319,13 +319,12 @@ shinyServer <- function(input, output, session) {
         output$OrderSummary <- renderTable({values$df[,2:4]})
         #values$df <- data.frame(Item = "", Number = 0, Price = 0, Pub = "", TableNumber = 0, OrderNumber = 0, OrderQrRef = "", OrderStatus = "")
         
-        
         #2.g Allow customer to downloadable png qr code ----
         output$downloadPNG <- downloadHandler(
-          filename = gsub(":", "_", paste0(values$OrderNum, Sys.time(),".png")),
-          content = function(file = gsub(":", "_", paste0(values$OrderNum, gm_date(),".png"))) {
+          filename = gsub(":", "_", paste0("Order", values$OrderNum, Sys.time(),".png")),
+          content = function(file = gsub(":", "_", paste0("Order", values$OrderNum, date(),".png"))) {
             png(file, width = 200, height = 200)
-            print(qrcode_gen(values$Rec$OrderQrRef[1]))
+            print(qrcode_gen(gsub("_","",values$Rec$OrderQrRef[1])))
             dev.off()
           })
       }
