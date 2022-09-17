@@ -262,8 +262,8 @@ shinyServer <- function(input, output, session) {
         #  values$Rec$OrderPhone[1] <- 0
         #  values$Rec$OrderName[1] <- ""
         #}
-        values$Rec$OrderIntPhone[1] <- ""
-        values$Rec$OrderPhone[1] <- ""
+        values$Rec$OrderIntPhone[1] <- 0
+        values$Rec$OrderPhone[1] <- 0
         values$Rec$OrderName[1] <- paste0(gsub(" ", "_", input$CustName), strrep("*", max(0, 9 - nchar(input$CustName))))
 
         #create the order number
@@ -301,7 +301,8 @@ shinyServer <- function(input, output, session) {
         names(values$Db) <- c("OrderRecord", "CompOrderList")
         
         #add order and record to database
-        
+        #print(values$Rec)
+        #print(sapply(values$Rec, class))
         dbWriteTable(cn, name = paste0(values$TestCentre, "Records"), value = values$Rec, append = TRUE)
         dbWriteTable(cn, name = paste0(values$TestCentre, "Orders"), value = values$df, append = TRUE)
         dbDisconnect(cn)
