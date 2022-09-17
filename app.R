@@ -282,6 +282,7 @@ shinyServer <- function(input, output, session) {
         
         values$OrdNumInt <- dbGetQuery(cn, paste0("SELECT MAX(OrderNumber) FROM ", values$TestCentre, "Orders;"))
         values$OrderNum <- as.numeric(values$OrdNumInt[1,1]) + 1
+        if(is.na(values$OrderNum) == T || is.null(values$OrderNum) == T) {values$OrderNum <- 1}
         values$Rec$OrderNumber <- values$OrderNum
         values$df$OrderNumber <- values$OrderNum
         
