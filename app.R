@@ -190,12 +190,12 @@ shinyServer <- function(input, output, session) {
 #  })
   
   #Allow customer to downloadable privacy policy ----
-  output$downloadPriv <- downloadHandler(
-    filename = "GDPR Policy and Checklist.txt",
-    content = function(file){
-      file.copy("GDPR Policy and Checklist.txt", file)
-    }
-  )
+  #output$downloadPriv <- downloadHandler(
+  #  filename = "GDPR Policy and Checklist.txt",
+  #  content = function(file){
+  #    file.copy("GDPR Policy and Checklist.txt", file)
+  #  }
+  #)
   
   #2.f. Record the order ----
   
@@ -238,12 +238,12 @@ shinyServer <- function(input, output, session) {
           showCancelButton = FALSE,
           inputId = "shinyalert"
         )
-      } else if(input$GDPR_ok == FALSE & (input$CustName != "" | input$CustPhoneNumber != "")) {
-        shinyalert(
-          text = "Error: If you have given your name or phone number, please consent to share name and phone number to proceed",
-          showCancelButton = FALSE,
-          inputId = "shinyalert2"
-        )
+      #} else if(input$GDPR_ok == FALSE & (input$CustName != "" | input$CustPhoneNumber != "")) {
+      #  shinyalert(
+      #    text = "Error: If you have given your name or phone number, please consent to share name and phone number to proceed",
+      #    showCancelButton = FALSE,
+      #    inputId = "shinyalert2"
+      #  )
       } else {
         
         #Record Data to data frame prior to updating data base
@@ -253,16 +253,19 @@ shinyServer <- function(input, output, session) {
         #values$Rec$OrderEmail[1] <- input$CustEmail
         values$Rec$OrderEmail[1] <- ""
         values$Rec$OrderTimeIn[1] <- format(Sys.time(), format = "%Y-%m-%d %I:%M:%S")
-        if(input$GDPR_ok == TRUE) {
-          values$Rec$OrderIntPhone[1] <- input$CustIntCode
-          values$Rec$OrderPhone[1] <- input$CustPhoneNumber
-          values$Rec$OrderName[1] <- paste0(gsub(" ", "_", input$CustName), strrep("*", max(0, 9 - nchar(input$CustName))))
-        } else {
-          values$Rec$OrderIntPhone[1] <- 0
-          values$Rec$OrderPhone[1] <- 0
-          values$Rec$OrderName[1] <- ""
-        }
-        
+        #if(input$GDPR_ok == TRUE) {
+        #  values$Rec$OrderIntPhone[1] <- input$CustIntCode
+        #  values$Rec$OrderPhone[1] <- input$CustPhoneNumber
+        #  values$Rec$OrderName[1] <- paste0(gsub(" ", "_", input$CustName), strrep("*", max(0, 9 - nchar(input$CustName))))
+        #} else {
+        #  values$Rec$OrderIntPhone[1] <- 0
+        #  values$Rec$OrderPhone[1] <- 0
+        #  values$Rec$OrderName[1] <- ""
+        #}
+        values$Rec$OrderIntPhone[1] <- ""
+        values$Rec$OrderPhone[1] <- ""
+        values$Rec$OrderName[1] <- paste0(gsub(" ", "_", input$CustName), strrep("*", max(0, 9 - nchar(input$CustName))))
+
         #create the order number
         #establish database connection
         
@@ -319,8 +322,8 @@ shinyServer <- function(input, output, session) {
         
         #2.g Allow customer to downloadable png qr code ----
         output$downloadPNG <- downloadHandler(
-          filename = gsub(":", "_", paste0(input$CustEmail, Sys.time(),".png")),
-          content = function(file = gsub(":", "_", paste0(input$CustEmail, gm_date(),".png"))) {
+          filename = gsub(":", "_", paste0(values$OrderNum, Sys.time(),".png")),
+          content = function(file = gsub(":", "_", paste0(values$OrderNum, gm_date(),".png"))) {
             png(file, width = 200, height = 200)
             print(qrcode_gen(values$Rec$OrderQrRef[1]))
             dev.off()
@@ -429,16 +432,16 @@ shinyUI <- fluidPage(
     
     #input customer phone number
     
-    div(style="display: inline-block;vertical-align:top; width: 75px;",textInput(inputId = "CustIntCode", label = "Int Code", value = +44)),
-    div(style="display: inline-block;vertical-align:top; width: 25px;",HTML("<br>")),
-    div(style="display: inline-block;vertical-align:top; width: 150px;",textInput(inputId = "CustPhoneNumber", label = "Phone Number")),
-    div(style="display: clear"),
+    #div(style="display: inline-block;vertical-align:top; width: 75px;",textInput(inputId = "CustIntCode", label = "Int Code", value = +44)),
+    #div(style="display: inline-block;vertical-align:top; width: 25px;",HTML("<br>")),
+    #div(style="display: inline-block;vertical-align:top; width: 150px;",textInput(inputId = "CustPhoneNumber", label = "Phone Number")),
+    #div(style="display: clear"),
     #textOutput(outputId = "PhoneNumberCheck"),
     
-    checkboxInput(inputId = "GDPR_ok", "I agree to my name and phone number being stored for sharing with NHS test and trace, as per the privacy policy.", FALSE),
-    textOutput(outputId = "GDPRCheck"),
+    #checkboxInput(inputId = "GDPR_ok", "I agree to my name and phone number being stored for sharing with NHS test and trace, as per the privacy policy.", FALSE),
+    #textOutput(outputId = "GDPRCheck"),
     #div(style="margin-bottom:10px"),
-    downloadLink(outputId = "downloadPriv", label = "Privacy Policy"),
+    #downloadLink(outputId = "downloadPriv", label = "Privacy Policy"),
 
     #Proceed to payment button
     div(style="margin-bottom:10px"),
