@@ -327,7 +327,7 @@ shinyServer <- function(input, output, session) {
           filename = gsub(":", "_", paste0("Order", values$OrderNum, Sys.time(),".png")),
           content = function(file = gsub(":", "_", paste0("Order", values$OrderNum, date(),".png"))) {
             png(file, width = 200, height = 200)
-            print(qrcode_gen(values$Rec$OrderQrRef[1]))
+            plot(qr_code(values$Rec$OrderQrRef[1]))
             dev.off()
           })
       }
