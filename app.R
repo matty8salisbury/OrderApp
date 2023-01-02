@@ -323,10 +323,10 @@ shinyServer <- function(input, output, session) {
         #values$df <- data.frame(Item = "", Number = 0, Price = 0, Pub = "", TableNumber = 0, OrderNumber = 0, OrderQrRef = "", OrderStatus = "")
         
         #2.g Allow customer to downloadable png qr code ----
-        output$downloadPNG <- downloadHandler(
+        output$downloadPdf <- downloadHandler(
           filename = gsub(":", "_", paste0("Order", values$OrderNum, Sys.time(),".png")),
-          content = function(file = gsub(":", "_", paste0("Order", values$OrderNum, date(),".png"))) {
-            png(file, width = 200, height = 200)
+          content = function(file = gsub(":", "_", paste0("Order", values$OrderNum, date(),".pdf"))) {
+            pdf(file)
             plot(qr_code(values$Rec$OrderQrRef[1]))
             dev.off()
           })
@@ -460,7 +460,7 @@ shinyUI <- fluidPage(
       tags$b("Please take note of your Order Number and Download the QR code"),
       div(style="margin-bottom:10px"),
       
-      downloadButton(outputId = "downloadPNG", label = "Download QR code order record"),
+      downloadButton(outputId = "downloadPdf", label = "Download QR code order record"),
       
       div(style="margin-bottom:10px"),
       actionButton(inputId = "refresh", label = "Start a New Order"),
