@@ -324,14 +324,14 @@ shinyServer <- function(input, output, session) {
         
         #2.g Allow customer to downloadable png qr code ----
         output$downloadPdf <- downloadHandler(
-          filename = gsub(":", "_", paste0("Order", values$OrderNum, Sys.time(),".png")),
-          content = function(file = gsub(":", "_", paste0("Order", values$OrderNum, date(),".pdf"))) {
+          filename = gsub(":", "_", paste0("Order", values$OrderNum, Sys.time(),".pdf")),
+          content = function(file = filename) {
             pdf(file)
             plot(qr_code(values$Rec$OrderQrRef[1]))
             dev.off()
           })
       }
-      }
+    }
   })      
   
   #2.h Start New Order Command
