@@ -74,7 +74,7 @@ shinyServer <- function(input, output, session) {
     OrderName = "", OrderEmail = "", OrderTimeIn = "", OrderIntPhone = 0, OrderPhone = 0, OrderNumber = 0, OrderQrRef = "", OrderTimeOut = "", stringsAsFactors = FALSE
   )
   values$df <- data.frame(
-    Phone = "", Postcode = "", Address ="", Item = "", Number = 0, Price = 0, TableNumber = 0, OrderNumber = 0, OrderQrRef = "", OrderStatus = "", 
+    row_names = "", Item = "", Number = 0, Price = 0, Pub = "", TableNumber = 0, OrderNumber = 0, OrderQrRef = "", OrderStatus = "", 
     stringsAsFactors = FALSE
   )
   
